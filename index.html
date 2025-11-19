@@ -35,17 +35,7 @@ ul {
 ul ul {
     margin-left: 20px;
 }
-#product-list label.toggleable {
-    cursor: pointer;
-}
-#product-list label.toggleable::after {
-    content: ' [-]';
-    font-weight: bold;
-    float: right;
-}
-#product-list label.toggleable.closed::after {
-    content: ' [+]';
-}
+
     </style>
 </head>
 <body>
@@ -230,37 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
-     
-    const categoryLabels = document.querySelectorAll('#product-list label');
 
-    categoryLabels.forEach(label => {
-        const sublista = label.nextElementSibling;
-        sublista.style.display = 'none';
-    });
-    categoryLabels.forEach(label => {
-        
-        if (label.nextElementSibling && label.nextElementSibling.tagName === 'UL') {
-            label.classList.add('toggleable');
-
-            label.addEventListener('click', function(event) {
-                // Prevent the checkbox from being toggled when clicking the label
-                event.preventDefault();
-
-                // Toggle the 'open' class on the label
-                this.classList.toggle('open');
-
-                // Get the next element sibling, which is the 'ul'
-                const sublist = this.nextElementSibling;
-
-                // Toggle the display of the sublist
-                if (sublist.style.display === 'block') {
-                    sublist.style.display = 'none';
-                } else {
-                    sublist.style.display = 'block';
-                }
-            });
-        }
-    });
 });
 
 </script>
