@@ -44,7 +44,7 @@ ul ul {
         <h2>Select your priority products</h2>
     </div>
     <div style="flex: 1;">
-        <h2>Or use another custome's selection</h2>
+        <h2>Or use another customer's selection</h2>
     </div>
     </div>
     <div id="main-container">
@@ -117,6 +117,16 @@ ul ul {
             <div class="preset" id="customer3" draggable="true">
                 <h3>Customer 3 preset</h3>
             </div>
+            <h2>Or use another user's selection</h2>
+            <div class="preset" id="user1" draggable="true">
+                <h3>User 1 preset</h3>
+            </div>
+            <div class="preset" id="user2" draggable="true">
+                <h3>User 2 preset</h3>
+            </div>
+            <div class="preset" id="user3" draggable="true">
+                <h3>User 3 preset</h3>
+            </div>
         </div>
     </div>
 
@@ -150,6 +160,21 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         customer3: [
             'roof-safety', 'roof-walkway', 'bridge-rr33',
+            'rain-water', 'gutters', 'gutter-125-rr23', 'gutter-125-rr32', 'gutter-125-rr33'
+        ],
+        user1: [
+            'classic', 'classic-rr23', 'classic-rr32', 'classic-rr33',
+            'gutters', 'gutter-125-rr23', 'gutter-125-rr32', 'gutter-125-rr33'
+        ],
+        user2: [
+            'roof', 'monterrey', 'monterrey-rr32', 'monterrey-rr33', 'monterrey-rr23',
+            'classic', 'classic-rr23', 'classic-rr32', 'classic-rr33',
+            'roof-walkway', 'bridge-rr23', 'bridge-rr32', 'bridge-rr33'
+        ],
+        user3: [
+            'roof', 'classic', 'classic-rr23', 'classic-rr32', 'classic-rr33',
+            'roof', 'monterrey', 'monterrey-rr32', 'monterrey-rr33', 'monterrey-rr23',
+            'roof-safety', 'roof-walkway', 'bridge-rr23', 'bridge-rr32', 'bridge-rr33'
             'rain-water', 'gutters', 'gutter-125-rr23', 'gutter-125-rr32', 'gutter-125-rr33'
         ]
     };
