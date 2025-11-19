@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List with Presets</title>
+    <style>body {
+    font-family: sans-serif;
+}
+#main-container {
+    display: flex;
+    gap: 20px;
+}
+#product-list-container {
+    flex: 1;
+    border: 2px dashed #ccc;
+    padding: 10px;
+}
+#presets {
+    flex: 1;
+}
+.preset {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: grab;
+}
+.drag-over {
+    background-color: #e0e0e0;
+}
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+ul ul {
+    margin-left: 20px;
+}</style>
+</head>
+<body>
+
+    <h1>Customers priority products</h1>
+    <div style="display: flex; gap: 50px;">
+    <div style="flex: 1;">
+        <h2>Select your priority products</h2>
+    </div>
+    <div style="flex: 1;">
+        <h2>Or use another custome's selection</h2>
+    </div>
+    </div>
+    <div id="main-container">
+        <div id="product-list-container">
+            <ul id="product-list">
+                <li>
+                    <input type="checkbox" id="roof">
+                    <label for="roof">Roof</label>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="monterrey">
+                            <label for="monterrey">Monterrey</label>
+                            <ul>
+                                <li><input type="checkbox" id="monterrey-rr32"><label for="monterrey-rr32">Monterrey RR32</label></li>
+                                <li><input type="checkbox" id="monterrey-rr33"><label for="monterrey-rr33">Monterrey RR33</label></li>
+                                <li><input type="checkbox" id="monterrey-rr23"><label for="monterrey-rr23">Monterrey RR23</label></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="classic">
+                            <label for="classic">Classic</label>
+                            <ul>
+                                <li><input type="checkbox" id="classic-rr23"><label for="classic-rr23">Classic RR23</label></li>
+                                <li><input type="checkbox" id="classic-rr32"><label for="classic-rr32">Classic RR32</label></li>
+                                <li><input type="checkbox" id="classic-rr33"><label for="classic-rr33">Classic RR33</label></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="checkbox" id="roof-safety">
+                    <label for="roof-safety">Roof safety</label>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="roof-walkway">
+                            <label for="roof-walkway">Roof walkway</label>
+                            <ul>
+                                <li><input type="checkbox" id="bridge-rr23"><label for="bridge-rr23">Bridge RR23</label></li>
+                                <li><input type="checkbox" id="bridge-rr32"><label for="bridge-rr32">Bridge RR32</label></li>
+                                <li><input type="checkbox" id="bridge-rr33"><label for="bridge-rr33">Bridge RR33</label></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="checkbox" id="rain-water">
+                    <label for="rain-water">Rain water</label>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="gutters">
+                            <label for="gutters">Gutters</label>
+                            <ul>
+                                <li><input type="checkbox" id="gutter-125-rr23"><label for="gutter-125-rr23">Gutter 125 4m RR23</label></li>
+                                <li><input type="checkbox" id="gutter-125-rr32"><label for="gutter-125-rr32">Gutter 125 4m RR32</label></li>
+                                <li><input type="checkbox" id="gutter-125-rr33"><label for="gutter-125-rr33">Gutter 125 4m RR33</label></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="presets">
+            <div class="preset" id="customer1" draggable="true">
+                <h3>Customer 1 preset</h3>
+            </div>
+            <div class="preset" id="customer2" draggable="true">
+                <h3>Customer 2 preset</h3>
+            </div>
+            <div class="preset" id="customer3" draggable="true">
+                <h3>Customer 3 preset</h3>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+    const productList = document.getElementById('product-list');
+
+    productList.addEventListener('change', function (e) {
+        if (e.target.type === 'checkbox') {
+            const listItem = e.target.closest('li');
+            const nestedList = listItem.querySelector('ul');
+
+            if (nestedList) {
+                const checkboxes = nestedList.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = e.target.checked;
+                });
+            }
+        }
+    });
+
+    const presets = {
+        customer1: [
+            'classic', 'classic-rr23', 'classic-rr32', 'classic-rr33',
+            'gutters', 'gutter-125-rr23', 'gutter-125-rr32', 'gutter-125-rr33'
+        ],
+        customer2: [
+            'roof', 'monterrey', 'monterrey-rr32', 'monterrey-rr33', 'monterrey-rr23',
+            'classic', 'classic-rr23', 'classic-rr32', 'classic-rr33',
+            'roof-walkway', 'bridge-rr23', 'bridge-rr32', 'bridge-rr33'
+        ],
+        customer3: [
+            'roof-safety', 'roof-walkway', 'bridge-rr33',
+            'rain-water', 'gutters', 'gutter-125-rr23', 'gutter-125-rr32', 'gutter-125-rr33'
+        ]
+    };
+
+    const productListContainer = document.getElementById('product-list-container');
+    const presetElements = document.querySelectorAll('.preset');
+
+    presetElements.forEach(preset => {
+        preset.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('text/plain', e.target.id);
+        });
+    });
+
+    productListContainer.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        productListContainer.classList.add('drag-over');
+    });
+
+    productListContainer.addEventListener('dragleave', function () {
+        productListContainer.classList.remove('drag-over');
+    });
+
+    productListContainer.addEventListener('drop', function (e) {
+        e.preventDefault();
+        productListContainer.classList.remove('drag-over');
+        const presetId = e.dataTransfer.getData('text/plain');
+        const selectedPreset = presets[presetId];
+
+        const allCheckboxes = productListContainer.querySelectorAll('input[type="checkbox"]');
+        allCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        if (selectedPreset) {
+            selectedPreset.forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    });
+});
+
+</script>
+
+
+</body>
+</html>
